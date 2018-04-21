@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css">
+    <title>Car Calculators</title>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile.min.js"></script>
+    <script src="js/app.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+</head>
+
+<body>
+<!--     <div class="app">
+        <h1>PhoneGap</h1>
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
+    </div> -->
+
+   <!--             HOME PAGE             -->
+    <div id="homeScreen" data-role="page">
+<!--         <header data-role="header" data-position="fixed" data-id="appHeader">
+            <h1>Car Calculators</h1>            
+        </header> -->
+        <!-- <img src="img/gtiHalfBW.JPG" class="banner homeBanner"> -->
+        <div data-role="content">
+            <h1>Welcome to Carculators</h1>
+            <ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+            <li><a href="#whpCalcPage">WHP Calculator</a></li>
+            <li><a href="#altCalcPage">Altitude Caclulator</a></li>
+            <li><a href="#aboutPage">About</a></li>
+            </ul>
+        </div>
+        <!-- FOOTER -->
+        <footer data-id="footNav" data-role="footer" data-position="fixed" data-inset="true" class="ui-nodisc-icon myFoot">
+            <div data-role="navbar" class="ui-navbar" role="navigation">
+                <ul class="ui-grid-a">
+                    <li class="ui-block-a"><a href="#homeScreen" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-home ui-btn-active ui-state-persist" data-transition="slide"></a></li>
+                    <li class="ui-block-b"><a href="#whpCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-refresh" data-transition="slide"></a></li>
+                    <li class="ui-block-c"><a href="#altCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-cloud" data-transition="slide"></a></li>
+                    <li class="ui-block-d"><a href="#aboutPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-info" data-transition="slide"></a></li>
+                </ul>                  
+            </div>       
+        </footer>
+    </div> <!--  end home page -->
+
+       <!--             WHP CALC PAGE             -->
+    <div id="whpCalcPage" data-role="page">
+<!--         <header data-role="header" data-position="fixed" data-id="appHeader">
+            <h1>WHP Calculator</h1> 
+            <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>           
+        </header> -->
+        
+        <div data-role="content">
+        <h1>Wheel Horsepower Calculator</h1>
+        <h3>Here you can calculate a vehicle's estimated wheel horsepower by entering the crank horsepower, selecting the transmission and drive type, and hitting "Calculate".</h3>
+        <div class="calcBG">
+        <div class="ui-field-contain">
+        <label for="crankHP">Enter Crank HP:</label>
+        <input type="number" name="number" pattern="[0-9]*" id="crankHP" value="">
+        </div>
+
+        <fieldset data-role="controlgroup">
+        <legend>Transmission:</legend>
+        <input type="radio" name="transType" id="auto" value="auto" checked="checked">
+        <label for="auto">Automatic</label>
+        <input type="radio" name="transType" id="manual" value="manual">
+        <label for="manual">Manual</label>
+</fieldset>
+
+<!--         <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>Engine Location:</legend>
+        <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
+        <label for="radio-choice-c">Front</label>
+        <input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid">
+        <label for="radio-choice-d">Mid</label>
+        <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery">
+        <label for="radio-choice-e">Rear</label>
+</fieldset> -->
+
+<fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Drive Type:</legend>
+        <input type="radio" name="driveType" id="fwd" value="fwd" checked="checked">
+        <label for="fwd">FWD</label>
+        <input type="radio" name="driveType" id="awd" value="awd">
+        <label for="awd">AWD</label>
+        <input type="radio" name="driveType" id="rwd" value="rwd">
+        <label for="rwd">RWD</label>
+</fieldset>
+
+    <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" onclick="calculateWHP()">Calculate</a>
+
+        <div class="results">
+            <p>Estimated WHP: <span id="estWHP" class="result"></span></p> 
+        </div>
+        </div>
+        <br>
+        <br>
+        <p>*Disclaimer: These values are just an estimate based off generally accepted calculations regarding drivetrain loss. For more information regarding wheel horsepower and drivetrain loss visit the <a href="#aboutPage">about</a> page.</p>
+    </div>
+        <!-- FOOTER -->
+        <footer data-id="footNav" data-role="footer" data-position="fixed" data-inset="true" class="ui-nodisc-icon myFoot">
+            <div data-role="navbar" class="ui-navbar" role="navigation">
+                <ul class="ui-grid-a">
+                    <li class="ui-block-a"><a href="#homeScreen" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-home" data-transition="slide" data-direction="reverse"></a></li>
+                    <li class="ui-block-b"><a href="#whpCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-refresh ui-btn-active ui-state-persist"></a></li>
+                    <li class="ui-block-c"><a href="#altCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-cloud" data-transition="slide"></a></li>
+                    <li class="ui-block-d"><a href="#aboutPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-info" data-transition="slide"></a></li>
+                </ul>                  
+            </div>       
+        </footer>
+    </div> <!--  end WHP page -->
+
+    <!--             ALTITUDE PAGE              -->
+        <div id="altCalcPage" data-role="page">
+<!--         <header data-role="header" data-position="fixed" data-id="appHeader">
+            <h1>Altitude Loss Calculator</h1> 
+            <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>           
+        </header>   -->
+        <div data-role="content">
+        <h1>Altitude Loss Calculator</h1>
+        <h3>To see how much power a vehicle will lose at a certain elevation, enter the altitude and horsepower at sea level, then hit "
+        Calculate".</h3>
+        <p>Note: This calculator is only intended to be used for naturally aspirated vehicles. Forced-induction vehicles will not experience the same power loss at elevations.</p>
+
+            
+
+
+        <div class="calcBG">
+        <div class="ui-field-contain">
+        <label for="altitude">Enter Altitude in Feet:</label>
+        <!-- <button class="altBtn" onclick="getAltitude()" id="getAlt" data-icon="location"></button> -->
+        <a href="#" onclick="getAltitude()" class="ui-btn ui-shadow ui-corner-all ui-icon-location ui-btn-icon-notext"></a>
+        <input type="number" name="number" pattern="[0-9]*" id="altitude" value="">
+        </div>
+        <div class="ui-field-contain">
+        <label for="whp">Enter horsepower at sea level:</label>
+        <input type="number" name="number" pattern="[0-9]*" id="whp" value="">
+        </div>
+<!--         <fieldset data-role="controlgroup">
+    <legend>Aspiration:</legend>
+        <input type="radio" name="aspiration" id="natAsp" value="natAsp" checked="checked">
+        <label for="natAsp">Naturally Aspirated</label>
+        <input type="radio" name="aspiration" id="forcedInd" value="forcedInd">
+        <label for="forcedInd">Forced Induction (turbo/supercharged)</label>
+</fieldset> -->
+        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" onclick="calculateAltLoss()">Calculate</a>
+
+            <div class="results">
+                <p>Estimated WHP Loss: <span class="result" id="whpLoss"></span></p>   
+                <p>Estimated WHP at Altitude: <span class="result" id="altWHP"></span></p>
+            </div>
+            </div>
+            <br>
+            <br>
+            <p>*Disclaimer: These values are just an estimate based off generally accepted calculations regarding altitude loss. For more information regarding horsepower loss visit the <a href="#aboutPage">about</a> page.</p>
+        </div>
+        <!-- FOOTER -->
+        <footer data-id="footNav" data-role="footer" data-position="fixed" data-inset="true" class="ui-nodisc-icon myFoot">
+            <div data-role="navbar" class="ui-navbar" role="navigation">
+                <ul class="ui-grid-a">
+                    <li class="ui-block-a"><a href="#homeScreen" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-home" data-transition="slide" data-direction="reverse"></a></li>
+                    <li class="ui-block-b"><a href="#whpCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-refresh" data-transition="slide" data-direction="reverse"></a></li>
+                    <li class="ui-block-c"><a href="#altCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-cloud ui-btn-active ui-state-persist"></a></li>
+                    <li class="ui-block-d"><a href="#aboutPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-info" data-transition="slide"></a></li>
+                </ul>                  
+            </div>       
+        </footer>
+        </div> <!-- end alt page -->
+
+    <!--             ABOUT PAGE              -->
+    <div id="aboutPage" data-role="page">
+<!--         <header data-role="header" data-position="fixed" data-id="appHeader">
+            <h1>About</h1> 
+            <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>           
+        </header>   -->
+        <div data-role="content">
+        <h1>About</h1>
+        <p>Here you can learn more about the reasoning and science that goes into horsepower measurements and altitude power loss. Keep in mind that there are many factors that go into these two measurements, and I have chosen to focus on the larger aspects.</p>
+            <div data-role="collapsible" data-theme="b" data-content-theme="b" data-inset="false">
+            <h4>Wheel Horsepower</h4>
+            <p>When measuring a vehicle's power, there are two places to measure: at the crank, and at the wheels. Crank horsepower is measured at the engines crankshaft. this is directly affected by the engine and is therefore a good measure of the power output of an engine. It can be assumed that the same powertrain (engine, air filter, cooling system, exhaust, etc.) would produce the same crank horsepower in any other vehicle. Wheel horsepower, as the name implies, is measured at the wheels. Because transmission and drivetrain systems are not 100% efficient, some of the crank horsepower is lost. This is called drivetrain loss. Drivetrain loss is affected by the transmission and drive type. Automatic transmissions generally suffer more drivetrain loss than manuals. Rear wheel drive cars also experience more loss than front wheel drive, and all wheel drive loses the most power. There are some exceptions involving engine placement, for example the Porsche 911 is rear engine and rear wheel drive. This setup will have less drivetrain loss than a front engine rear wheel drive car. Car manufacturers will usually advertise the crank horsepower of a vehicle because the larger number sounds better, but if you measured the horsepower at the wheels it would not return the same number.</p>
+            </div>
+            <div data-role="collapsible" data-theme="b" data-content-theme="b" data-inset="false">
+            <h4>Altitude Loss</h4>
+            <p>Internal combustion engines burn fuel and air to produce power. Generally speaking, the more air and fuel you cram into an engine, the more power it will make. However, at higher elevations the atmospheric pressure is lower and the air is thinner, resulting in less air being used by the engine and less power being made. The higher you go in elevation, the thinner the air gets. This is called altitude loss. This can be compensated for by using forced-induction systems like turbochargers or superchargers. Turbochargers and superchargers are different methods of doing the same thing, which is compressing air before it is fed into the engine. Force feeding air into the engine increases horsepower by giving it more to burn. Because forced-induction systems read the PSI of the air going through them they can account for the lower atmospheric pressure at elevation. This is why at higher elevations cars with smaller, turbocharged, four cylinder engines can keep up with or pass cars with larger naturally aspirated engines that would be faster at sea level. This is still, of course, entirely dependent on the horsepower difference between the two.</p>
+            </div>            
+
+        </div>
+        <!-- FOOTER -->
+        <footer data-role="footer" data-id="footNav" data-position="fixed" data-inset="true" class="ui-nodisc-icon myFoot">
+            <div data-role="navbar" class="ui-navbar" role="navigation">
+                <ul class="ui-grid-a">
+                    <li class="ui-block-a"><a href="#homeScreen" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-home" data-transition="slide" data-direction="reverse"></a></li>
+                    <li class="ui-block-b"><a href="#whpCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-refresh" data-transition="slide" data-direction="reverse"></a></li>
+                    <li class="ui-block-c"><a href="#altCalcPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-cloud" data-transition="slide" data-direction="reverse"></a></li>
+                    <li class="ui-block-d"><a href="#aboutPage" class="ui-btn ui-btn-b ui-btn-icon-top ui-icon-info ui-btn-active ui-state-persist"></a></li>
+                </ul>                  
+            </div>       
+        </footer>
+    </div> <!-- end about page -->
+
+    <!--           JAVASCRIPT            -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+
+</html>
